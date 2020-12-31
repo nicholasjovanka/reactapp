@@ -1,0 +1,19 @@
+version : '3'
+services:
+  web:
+    build:
+      context: .   #Specifying where we want all the files and folder the image to be pulled from\
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:              #Refer to docker volume
+      - /app/node_modules    #This is to bookmark the node modules
+      - .:/app              #To set reference for the container to the local files in the host machien
+  tests:
+   build:
+      context: .   #Specifying where we want all the files and folder the image to be pulled from\
+      dockerfile: Dockerfile.dev
+    volumes:              #Refer to docker volume
+      - /app/node_modules    #This is to bookmark the node modules
+      - .:/app       
+    command: ["npm","run","test"]

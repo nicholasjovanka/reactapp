@@ -1,0 +1,9 @@
+sudo: required  #Tells that we need a super user level authorization
+services:            
+ - docker              #Tells travis ci to install a copy of docker to our running container
+
+before_install: #Write the command that need to be executed before the program is deployed or tested
+  - docker build -t nicholasjovanka/reactapp -f Dockerfile.dev .
+
+script: #Commands that is going to be ran when the test is going to be executed
+ - docker run nicholasjovanka/reactapp npm run test -- --coverage
